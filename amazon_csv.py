@@ -24,12 +24,19 @@ def gettotals(myorders):
         mytotal.append(total)
     return mytotal
 
+def addtotal(totallist):
+    total = 0
+    for price in totallist:
+        total += float(price)
+    return total
+
 file = 'orders.csv'
 filterby = 'Payment Instrument Type'
 myfilter = ''
 myparsedlist = parsecsv(file, filterby, myfilter)              
 mytotallist = gettotals(myparsedlist)
-print(mytotallist)      
+mytotal = addtotal(mytotallist)  
+print(mytotal)    
 
 
 
