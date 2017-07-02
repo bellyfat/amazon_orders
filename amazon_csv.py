@@ -17,12 +17,21 @@ def filterrowout(text, filterindex, row):
     else:
         return False
 
+def gettotals(myorders):
+    mytotal = []
+    for order in myorders:
+        total = order[len(order) -3].replace('$', '')
+        mytotal.append(total)
+    return mytotal
+
 file = 'orders.csv'
 filterby = 'Payment Instrument Type'
 myfilter = ''
-mylist = parsecsv(file, filterby, myfilter)
-print(mylist)
-                
-        
+myparsedlist = parsecsv(file, filterby, myfilter)              
+mytotallist = gettotals(myparsedlist)
+print(mytotallist)      
+
+
+
 
     
