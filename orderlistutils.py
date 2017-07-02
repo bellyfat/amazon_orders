@@ -1,4 +1,10 @@
 
+def getheaderrow(orderlist):
+    return orderlist[0]
+
+def getfiltercolumnindex(columntext, orderheaderlist):
+    return orderheaderlist.index(columntext)
+
 def filterrowout(text, filterindex, row):
     return bool(row[filterindex] == text)
 
