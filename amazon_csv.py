@@ -1,5 +1,16 @@
 import csv
-with open('orders.csv', newline='') as csvfile:
-    ordersreader = csv.reader(csvfile, delimiter=' ', quotechar='|')
-    firstrow = next(ordersreader)
-    print(firstrow)
+
+def parsecsv(file, filter):
+    with open(file, newline='') as csvfile:
+        myorders = []
+        ordersreader = csv.reader(csvfile, delimiter=',', quotechar='|')
+        headerrow = next(ordersreader)
+        for row in ordersreader:
+            if row != headerrow:
+                myorders.append(row)
+        return myorders
+
+mylist = parsecsv('orders.csv', '')
+print(mylist)
+                
+        
