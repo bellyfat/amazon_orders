@@ -1,41 +1,13 @@
-import csv
+from csvparser import parsecsv
+from orderlistutils import *
 
-def parsecsv(file, filter, text):
-    with open(file, newline='') as csvfile:
-        myorders = []
-        ordersreader = csv.reader(csvfile, delimiter=',', quotechar='|')
-        headerrow = next(ordersreader)
-        filterindex = headerrow.index(filter)
-        for row in ordersreader:
-            if (filterrowout(text, filterindex, row) == False):
-                myorders.append(row)
-        return myorders
-
-def filterrowout(text, filterindex, row):
-    if (row[filterindex] == text):
-        return True
-    else:
-        return False
-
-def gettotals(myorders):
-    mytotal = []
-    for order in myorders:
-        total = order[len(order) -3].replace('$', '')
-        mytotal.append(total)
-    return mytotal
-
-def addtotal(totallist):
-    total = 0
-    for price in totallist:
-        total += float(price)
-    return total
-
-file = 'orders.csv'
+myfile = 'orders.csv'
 filterby = 'Payment Instrument Type'
 myfilter = ''
-myparsedlist = parsecsv(file, filterby, myfilter)              
-mytotallist = gettotals(myparsedlist)
-mytotal = addtotal(mytotallist)  
+myparsedlist = parsecsv(myfile)  
+myfilterdlist = filterorderlist(myparsedlist, filterby, myfilter) 
+ordercolumn = getordercolumn(myparsedlist)           
+mytotal = getordertotal(myfilterdlist, ordercolumn) 
 print(mytotal)    
 
 
