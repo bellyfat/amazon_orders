@@ -1,16 +1,28 @@
 import csv
 
-def parsecsv(file, filter):
+def parsecsv(file, filter, text):
     with open(file, newline='') as csvfile:
         myorders = []
         ordersreader = csv.reader(csvfile, delimiter=',', quotechar='|')
         headerrow = next(ordersreader)
+        filterindex = headerrow.index(filter)
         for row in ordersreader:
-            if row != headerrow:
+            if (filterrowout(text, filterindex, row) == False):
                 myorders.append(row)
         return myorders
 
-mylist = parsecsv('orders.csv', '')
+def filterrowout(text, filterindex, row):
+    if (row[filterindex] == text):
+        return True
+    else:
+        return False
+
+file = 'orders.csv'
+filterby = 'Payment Instrument Type'
+myfilter = ''
+mylist = parsecsv(file, filterby, myfilter)
 print(mylist)
                 
         
+
+    
